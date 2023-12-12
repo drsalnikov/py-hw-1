@@ -6,22 +6,24 @@ import numpy as np
 import matplotlib.pyplot as plt
 import duckdb as db
 import seaborn as sns
+from pathlib import Path
 
 def preload_content():
+    path = Path(__file__).parent
 
-    bank = Image.open('image/bank.jpg')
-    corr = Image.open('image/corr.png')
-    pairplot = Image.open('image/pairplot.png')
+    bank = Image.open(f"{path}\\image\\bank.jpg")
+    corr = Image.open(f"{path}\\image\\corr.png")
+    pairplot = Image.open(f"{path}\\image\\pairplot.png")
 
-    D_agreement = pd.read_csv("datasets\D_agreement.csv")
-    D_clients = pd.read_csv("datasets\D_clients.csv")
-    D_close_loan = pd.read_csv("datasets\D_close_loan.csv")
-    D_job = pd.read_csv("datasets\D_job.csv")
-    D_last_credit = pd.read_csv("datasets\D_last_credit.csv")
-    D_loan = pd.read_csv("datasets\D_loan.csv")
-    D_pens = pd.read_csv("datasets\D_pens.csv")
-    D_salary = pd.read_csv("datasets\D_salary.csv")
-    D_work = pd.read_csv("datasets\D_work.csv")
+    D_agreement = pd.read_csv(f"{path}\\datasets\\D_agreement.csv")
+    D_clients = pd.read_csv(f"{path}\\datasets\\D_clients.csv")
+    D_close_loan = pd.read_csv(f"{path}\\datasets\\D_close_loan.csv")
+    D_job = pd.read_csv(f"{path}\\datasets\\D_job.csv")
+    D_last_credit = pd.read_csv(f"{path}\\datasets\\D_last_credit.csv")
+    D_loan = pd.read_csv(f"{path}\\datasets\\D_loan.csv")
+    D_pens = pd.read_csv(f"{path}\\datasets\\D_pens.csv")
+    D_salary = pd.read_csv(f"{path}\\datasets\\D_salary.csv")
+    D_work = pd.read_csv(f"{path}\\datasets\\D_work.csv")
 
     D_client_loan = db.sql("SELECT l.ID_CLIENT, COUNT(l.ID_LOAN) as LOAN_NUM_TOTAL, SUM(cl.CLOSED_FL) as LOAN_NUM_CLOSED "
                         + " FROM D_loan l "
